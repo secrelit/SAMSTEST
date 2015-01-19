@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="finalams.Controller">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAgAAAAAAAAAAwAAAAA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.Date" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAkAAAAJAAAAAAQEABABAgAAAQAAAAEAABIAAAAAAA=</HashCode>
+      <FileName>Date.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.DateCategory" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAQAABAAAAAAAAAAgAAOsAAA=</HashCode>
+      <FileName>DateCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.DateRange">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>DateRange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.Program" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.PunchTimeDetails" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCEBAAIgAAAAAAAAAAAAAAAAAAAEAEAAAAIAAAAAACA=</HashCode>
+      <FileName>PunchTimeDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.StaffAttendanceRecord" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAIEQEEEAABAAAAAAAQAEAgECGAAAEggAQAACAA=</HashCode>
+      <FileName>StaffAttendanceRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.StaffGridRecords">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAAAogAAAEIAAAAQIAAAAAAAQECACAAIAAQAAAAAA=</HashCode>
+      <FileName>StaffGridRecords.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.StaffMember" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAAAAQAAAAAAAAAAIAAAECAAAEAAAIAAAAAA=</HashCode>
+      <FileName>StaffMember.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.Time" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAEABAAAAAAAACKAQgAAAAAAAAA=</HashCode>
+      <FileName>Time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.TimeDate" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAECAAAIQAAAAA=</HashCode>
+      <FileName>TimeDate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="finalams.TimeFrameDetails" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAQAAAAAICAAAgAAAAAAAAAA=</HashCode>
+      <FileName>TimeFrameDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
