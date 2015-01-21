@@ -700,6 +700,8 @@ namespace finalams
         public string dept;
         public string status;
 
+        private string connectionString = "server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True";
+
 
         // Inserting value in DailyPunchTime table called from xlSheetReader
         public void InsertToDailyPunchTime(PunchTimeDetails ptd, string name, finalams.Date date)
@@ -707,7 +709,7 @@ namespace finalams
             MySqlConnection con;
             MySqlCommand cmd;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string str = "insert into daily_punch_time values('" + name + "'," + date.Day + "," + date.Month + "," + date.Year + ",'" +ptd.InTime.toString()+ "','" +ptd.OutTime.toString()+ "','" + ptd.DateCategory + "','" + ptd.Remark + "')";
@@ -724,7 +726,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select name from staff_member where name =@name ";
@@ -758,7 +760,7 @@ namespace finalams
             MySqlConnection con;
             MySqlCommand cmd;
             MySqlDataReader reader;
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
             string nameString = "Select dept from staff_member where name =@name ";
 
@@ -785,7 +787,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select status from staff_member where name =@name ";
@@ -812,7 +814,7 @@ namespace finalams
             MySqlCommand cmd;
             // MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
             string str = "insert into new_staff_member values('" + name + "','" + in_time.toString() + "','" + out_time.toString() + "'," + date.Day + "," + date.Month + "," + date.Year + "," + id + ")";
             //string str = "insert into new_staff_member values("+id+",'"+name+"',+"+in_time.Hour+","+in_time.Minute+","+out_time.Hour+","+out_time.Minute+","+date.Day+","+date.Month+","+date.Year+")";
@@ -829,7 +831,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             int fromDay = dr.fromdate.Day;
@@ -906,7 +908,7 @@ namespace finalams
         //need to be execute..separatory
         public int GetDateCount(string Name, string dateCategory, DateRange dr)
         {
-            MySqlConnection con = new MySqlConnection("server=localhost;User Id=root;password=root;Persist Security Info=True;database=attendence");
+            MySqlConnection con = new MySqlConnection(connectionString);
 
             int fromDay = dr.fromdate.Day;
             int fromMonth = dr.fromdate.Month;
@@ -974,7 +976,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string str = "select name from staff_member where status=@Status";
@@ -1002,7 +1004,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string str = "select name,status,date_of_joining,punch_id from staff_member where dept=@dept";
@@ -1035,7 +1037,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select valid_in_time,valid_out_time,late_time from time_frame where dept=@dept ";
@@ -1068,7 +1070,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select  where dept =@dept ";
@@ -1100,7 +1102,7 @@ namespace finalams
             MySqlCommand cmd;
 
             string newDept = timeFrame.Department;
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update time_frame set dept=@newDept where dept=@oldDept ";
@@ -1129,7 +1131,7 @@ namespace finalams
             string validInTime = time_Frame.ValidInTime.toString();
             string dept = time_Frame.Department;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update time_frame  set  valid_in_time=validInTime where dept=@dept";
@@ -1160,7 +1162,7 @@ namespace finalams
             string validOutTime = time_Frame.ValidOutTime.toString();
             string dept = time_Frame.Department;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update time_frame  set  valid_out_time=@validOutTime where dept=@dept ";
@@ -1189,7 +1191,7 @@ namespace finalams
             string lateTime = time_Frame.LateTime.toString();
             string dept = time_Frame.Department;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update time_frame  set  late_time=@lateTime where dept=@dept ";
@@ -1217,7 +1219,7 @@ namespace finalams
             string name = punchTimeDetails.Name;
 
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update daily_punch_time set in_hours=@inTimeHours And in_mins=@inTimeMinutes where name=@name";
@@ -1251,7 +1253,7 @@ namespace finalams
             int outMins = int.Parse(punchTimeDetails.OutTime.Minute.ToString());
             string name = punchTimeDetails.Name;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update daily_punch_time set out_hours=@outHours And out_mins=@outMins where name=@name";
@@ -1285,7 +1287,7 @@ namespace finalams
             string dateCategory = punchTimeDetails.DateCategory;
             string remark = punchTimeDetails.Remark;
             string name = punchTimeDetails.Name;
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update daily_punch_time set date_category=@dateCategory And remark=@remark where name=@name";
@@ -1322,7 +1324,7 @@ namespace finalams
             int month = date.Month;
             int year = date.Year;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select in_hours,in_mins,out_hours,out_mins,date_category,remark from daily_punch_time where name=@name and day=@day and month=@month and year=@year  ";
@@ -1372,7 +1374,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             int fromDay = dr.fromdate.Day;
@@ -1448,7 +1450,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select dept,status,date_of_joining,punch_id from staff_member where name=@name";
@@ -1479,7 +1481,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select name,dept,date_of_joining,punch_id from staff_member where status=@status";
@@ -1511,7 +1513,7 @@ namespace finalams
             MySqlCommand cmd;
             string dept = staffMember.Department;
             string name = staffMember.Name;
-            con = new MySqlConnection("server=localhost;User Id=root;password=admin;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update staff_member set dept=@dept where name=@name";
@@ -1536,7 +1538,7 @@ namespace finalams
             MySqlCommand cmd;
             string status = staffMember.Status.ToString();
             string name = staffMember.Name;
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update staff_member set status=@status where name=@name";
@@ -1565,7 +1567,7 @@ namespace finalams
 
             string name = staffMemeber.Name;
             int punchId = staffMemeber.PunchId;
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update staff_member set name=@name where punch_id=@punchId ";
@@ -1591,7 +1593,7 @@ namespace finalams
             MySqlCommand cmd;
             MySqlDataReader reader;
 
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "Select name,dept,date_of_joining,punch_id from staff_member where status=@status";
@@ -1624,7 +1626,7 @@ namespace finalams
             MySqlCommand cmd;
 
             string newDept = staffMember.Department;
-            con = new MySqlConnection("server=localhost;User Id=root;password=root;database=attendence;Persist Security Info=True");
+            con = new MySqlConnection(connectionString);
             con.Open();
 
             string nameString = "update staff_member set dept=@newDept where dept=@oldDept ";
