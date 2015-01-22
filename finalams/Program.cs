@@ -9,9 +9,13 @@ namespace finalams
     {
         static void Main(string[] args)
         {
-            Controller controller = new Controller();
-            List<NewStaffMember> nsm = controller.SaveExcelToDatabase("H:\\Nilesh sir\\12-12-2015.xls");
-            Console.WriteLine("Count of new members : {0}",nsm.Count);
+           // Controller controller = new Controller();
+           // List<NewStaffMember> nsm = controller.SaveExcelToDatabase("H:\\Nilesh sir\\14-12-2015.xls");
+           //Console.WriteLine("Count of new members : {0}",nsm.Count);
+       DbOperations db = new DbOperations();
+            DateRange dr = new DateRange("12-12-2015","14-12-2015");
+            Console.WriteLine(db.GetDateCount("Jyoti M Kadam", "IPT Dates", dr ));
+            
             
             //PunchTimeDetails ptd = new PunchTimeDetails();
             //ptd= PunchTimeDetails.GetPunchTimeDetails("manish",new Date("11/11/2011"));

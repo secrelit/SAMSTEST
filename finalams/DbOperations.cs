@@ -909,6 +909,7 @@ namespace finalams
         public int GetDateCount(string Name, string dateCategory, DateRange dr)
         {
             MySqlConnection con = new MySqlConnection(connectionString);
+            con.Open();
 
             int fromDay = dr.fromdate.Day;
             int fromMonth = dr.fromdate.Month;
@@ -918,7 +919,7 @@ namespace finalams
             int toMonth = dr.todate.Month;
             int toYear = dr.todate.Year;
 
-            string str = "select count(date_category) from daily_punch_time where name=@Name AND date_catogory=@dateCategory AND day BETWEEN @fromDay and @toDay AND month BETWEEN @fromMonth and @toMonth AND year BETWEEN @fromYear and @toYear";
+            string str = "select date_category from daily_punch_time where name=@Name AND date_category=@dateCategory AND day BETWEEN @fromDay and @toDay AND month BETWEEN @fromMonth and @toMonth AND year BETWEEN @fromYear and @toYear";
             MySqlCommand cmd = new MySqlCommand(str, con);
 
             MySqlParameter param1 = new MySqlParameter();
@@ -962,8 +963,14 @@ namespace finalams
             cmd.Parameters.Add(param7);
             cmd.Parameters.Add(param8);
 
-            int count = (int)cmd.ExecuteScalar();
-
+           // int count = (int)cmd.ExecuteScalar();
+            int count = 0;
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                count = count + 1;
+            }
+            
             con.Close();
             return count;
 
