@@ -15,18 +15,18 @@ namespace finalams
         string remark;
         //member variables representing fields in the dpt table 
         //List<PunchTimeDetails> ptd = new List<PunchTimeDetails>();
-        bool isNameChanged, isDateChanged, isInTimeChanged, isOutTimeChanged, isDateCategoryChanged, isRemarkChanged;
+        bool isDateChanged, isInTimeChanged, isOutTimeChanged, isDateCategoryChanged, isRemarkChanged;
 
     
 
         //DbOperations dbo = new DbOperations();
 
-        public string Name
-        { get { return name; }
-            set { this.name = value;
-            isNameChanged = true;        
-                }
-        }
+        //public string Name
+        //{ get { return name; }
+        //    set { this.name = value;
+        //    isNameChanged = true;        
+        //        }
+        //}
         public Date Date
         { get { return date; }
 
@@ -103,30 +103,29 @@ namespace finalams
         //    this.remark = det.remark;
         //}
 
-        public void UpdateDPT()
+        public void UpdateDailyPunchTimeTable()
         {
             DbOperations dbo = new DbOperations();
             
 
             if (isInTimeChanged)
-            { 
+            {
+                
                 dbo.UpdateInTimeOf(this);
             }
             if (isOutTimeChanged)
             {
+                
                 dbo.UpdateOutTimeOf(this);
             }
-            if (isDateChanged)
+
+
+            if (isDateCategoryChanged)
             {
+                Console.WriteLine("the updated values for dpt in ptd::date = " + this.Date.toString());
                 dbo.UpdateDateCategoryOf(this);
             }
         }
-
-
-        internal void InsertIntoDailyPunchTime(PunchTimeDetails ptd, string name, finalams.Date date)
-        {
-            (new DbOperations()).InsertToDailyPunchTime(ptd,name,date);
-            //throw new NotImplementedException();
-        }
+   
     }
 }

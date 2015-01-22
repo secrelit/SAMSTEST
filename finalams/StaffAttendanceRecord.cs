@@ -11,17 +11,20 @@ namespace finalams
         string name,  dept;
         TimeFrameDetails timeframe;
         //StaffMember smd;
-        double  avgWorkingHours, minWorkingHours, maxWorkingHours;
-        //DateRange dr;
-        //Date date;//dateofjoining;
-        //Time Intime, Outtime;
+        //double  avgWorkingHours, minWorkingHours, maxWorkingHours;
+        Time avgWorkingTime,minWorkingTime,maxWorkingTime;
+         //DateRange dr;
+        Date date;//dateofjoining;
+        Time Intime, Outtime;
         //string remark;
         int punchid;
+        int noOfCLDates, noOfODDates, noOfMLDates, noOfCODates, noOfVacationDates, noOfPunctualDates;
         Constants.Status status;
         //string  dc;//=new DateCategory();
         List<PunchTimeDetails> punchTimeDetails;// = new List<PunchTimeDetails>();
 
-       // int noOfAbsentDates, noOfNoPunchDates, noOfIPTDates, noOfLateDates;
+        bool  isDateChanged, isInTimeChanged, isOutTimeChanged;
+
        
         public string Name
         {
@@ -31,18 +34,62 @@ namespace finalams
         {
             get { return dept; }
         }
-        //public Date Date
-        //{
-        //    get { return date; }
+        public Date Date
+        {
+            get { return date;
+            
+            }
 
-        //}
-        //public Time InTime
-        //{
-        //    get { return Intime; }
-        //}
-        //public Time OutTime
-        //{ get { return Outtime; } }
+            set { this.date = value;
+            isDateChanged = true;
+            }
 
+        }
+        public Time InTime
+        {
+            get { return Intime; }
+            set { this.Intime = value;
+            isInTimeChanged = true;
+            }
+        }
+        public Time OutTime
+        { get { return Outtime; }
+            set {
+
+                this.Outtime = value;
+                isOutTimeChanged = true;
+            }
+        }
+
+        public int NumberOfClDates
+        {
+            get { return noOfCLDates; }
+        }
+
+        public int NumberOfOdDates
+        {
+            get { return noOfODDates; }
+        }
+
+        public int NumberOfMlDates
+        {
+            get { return noOfMLDates; }
+        }
+
+        public int NumberOfCoDates
+        {
+            get { return noOfCODates; }
+        }
+
+        public int NumberOfVacationDates
+        {
+            get { return noOfVacationDates; }
+        }
+
+        public int NumberOfPunctualDates
+        {
+            get { return noOfPunctualDates; }
+        }
         //public string  DateCategory
         //{
         //    get { return dc; }
@@ -51,19 +98,22 @@ namespace finalams
         //{
         //    get { return remark; }
         //}
-        public double AvgWorkingHours
+        public Time AvgWorkingTime
         {
-            get { return avgWorkingHours; }
+            get { return avgWorkingTime; }
         }
        
-        public double MinWorkingHours
+        public Time  MinWorkingTime
         {
-            get { return minWorkingHours; }
+            get { return minWorkingTime; }
         }
-        public double MaxWorkingHours
+        public Time  MaxWorkingTime
         {
-            get { return maxWorkingHours; }
+            get { return maxWorkingTime; }
         }
+
+
+         
       /*  public void Populate(string name, Date date)
         {
            // List<PunchTimeDetails> ptds = new List<PunchTimeDetails>();
@@ -85,7 +135,8 @@ namespace finalams
             
             StaffMember staffMember = new StaffMember();
             staffMember.Populate(name);
-
+            //Console.WriteLine("The values staffmember in sar class::name=" + staffMember.Name + "  department =" + staffMember.Department + " date of joing =" + staffMember.DateOfJoining.toString() + " status = " + staffMember.Status + " punchid =" + staffMember.PunchId);
+            this.name = name;
             //// init department////
             this.dept = staffMember.Department;
             
@@ -98,45 +149,24 @@ namespace finalams
             //// init PTD list ////
             punchTimeDetails = PunchTimeDetails.GetPunchTimeDetails(name, dr);
            
-            //// init avg, min, max working hrs ////
+            this.noOfCLDates = GetDateCount(DateCategory.cl);
+            this.noOfODDates = GetDateCount(DateCategory.od);
+            this.noOfMLDates = GetDateCount(DateCategory.ml);
+            this.noOfCODates = GetDateCount(DateCategory.co);
+            this.noOfVacationDates = GetDateCount(DateCategory.vacation);
+            this.noOfPunctualDates = GetDateCount(DateCategory.punctual);
             this.CalculateAvgMinMax();
 
             return this;
    
         }
                                                     
-        //
+       
         public StaffAttendanceRecord GetStaffAttendanceRecord(string name, Date date)
         {
-            //StaffAttendanceRecord s1;
+            
             PunchTimeDetails punchtimedetail= PunchTimeDetails.GetPunchTimeDetails(name, date);
-          //  this.name = punchtimedetail.Name;
-           // this.date = punchtimedetail.Date;
-            //this.Intime = punchtimedetail.InTime;
-            //this.Outtime = punchtimedetail.OutTime;
-            //this.dc = punchtimedetail.DateCategory;
-            //this.remark = punchtimedetail.Remark;
-
-          //  Console.WriteLine("The values of sar:  " + this.Name + " " + this.date.toString() + " " + this.Intime.toString() + " " + this.Outtime.toString() + " " + this.dc.absent + " " + this.remark);
-              
-            //s1 = punchtimedetail;
-            //p.Populate(name, date);
-            
-            ////  Console.WriteLine(p.Name);
-            //List<StaffMember> members = new List<StaffMember>();
-            //StaffMember sm = new StaffMember();
-            //sm.ReadStaffMember(name);
-            
-            //s1.dept = sm.Department;
-            //s1.name = sm.Name;
-            //s1.status = sm.Status;
-            //s1.dateofjoining = sm.DateOfJoining;
-            //s1.punchid = sm.PunchId;
-            ////maintaining punchtimedetails data in sar object
-            //s1.Intime = p.InTime;
-            //s1.Outtime = p.OutTime;
-            //s1.dc = p.DateCategory;
-            //s1.remark = p.Remark;
+         
             return this;
         }
 
@@ -149,25 +179,50 @@ namespace finalams
             foreach (PunchTimeDetails punchTime in this.punchTimeDetails)
             {
                 int minutes = punchTime.OutTime - punchTime.InTime;
-                
+               
                 if (minMinutes > minutes)
-                    minMinutes = minutes;
+                { minMinutes = minutes;
+                if (minMinutes < 0)
+                    minMinutes = minMinutes * -1;
+                minutes = minutes * -1;
+                }
                 
                 if (maxMinutes < minutes)
                     maxMinutes = minutes;
-                totalMinutes += totalMinutes;
+                totalMinutes += minutes;
             }
 
-            this.minWorkingHours = minMinutes / 60; 
-            this.maxWorkingHours = maxMinutes / 60;
-            this.avgWorkingHours = totalMinutes / punchTimeDetails.Count;
+            
+            minWorkingTime=new Time(minMinutes);
+            maxWorkingTime=new Time(maxMinutes);
+            int avg;
+            avg = totalMinutes / punchTimeDetails.Count;
+            avgWorkingTime = new Time(avg );
+
+            Console.WriteLine("in sar min working time=" + minWorkingTime.Hour +":"+minWorkingTime.Minute+ " max wkg time= " + maxWorkingTime.Hour +":"+maxWorkingTime.Minute+ " avg wkg time=" + avgWorkingTime.Hour+":"+avgWorkingTime.Minute);
 
         }
 
 
         public void UpdatePTD()
-        { 
-        
+        {
+            PunchTimeDetails punchTime = new PunchTimeDetails();
+            if (isDateChanged)
+            {
+                punchTime.Date = this.date;
+            }
+            if (isInTimeChanged)
+            {
+                punchTime.InTime = this.Intime;
+            
+            }
+            if (isOutTimeChanged)
+            {
+                punchTime.OutTime = this.Outtime;
+            
+            }
+            punchTime.UpdateDailyPunchTimeTable();
+
         }
 
         public int GetDateCount(String dateCategory)

@@ -9,7 +9,6 @@ namespace finalams
     {
          string name, dept;
         Date d_o_j;
-        string oldDept;
         int punch_id;
         Constants.Status status;
           //member variables representing fields in the sm table 
@@ -45,11 +44,6 @@ namespace finalams
                 }
         }
 
-        public string OldDepartment
-        {
-            get { return oldDept; }
-            
-        }
         public int   PunchId
         { get { return punch_id; }
             set { this.punch_id = value; }
@@ -65,6 +59,7 @@ namespace finalams
         public List<string> GetStaffNamesWithStatus(Constants.Status status)
         {
             List<string> n = new List<string>();
+
             n = (new DbOperations()).ReadStaffNameWithStatus(status.ToString());
           
             return n;
@@ -77,11 +72,10 @@ namespace finalams
         public List<StaffMember> ReadStaffMembers(Constants.Status status)// this method will call dal method to fetch following data
         {
             //List<StaffMember> smlist = (new DbOperations()).ReadStaffMemberDetails(status);
-           // string str = status;
             return (new DbOperations()).ReadStaffMemberDetails(status);
         }
 
-        public void UpdateStaffmemberDetails()
+        public void UpdateStaffMemberDetails()
         {
 
             //if (isNameChanged)
@@ -90,7 +84,7 @@ namespace finalams
             //}
             if (isDepartmentChanged)
             {
-                dbo.UpdateDepartmentOf(this,oldDept) ;
+                dbo.UpdateDepartmentOf(this) ;
             }
             if (isStatusChanged)
             {
@@ -106,10 +100,11 @@ namespace finalams
             StaffMember member= dbo.ReadStaffMemberDetail(name);
             this.dept = member.dept ;
             this.d_o_j = member.d_o_j;
-            this.name = member.name;
+            this.name = name;
             this.status = member.status;
             this.punch_id = member.punch_id;
-            this.oldDept = member.dept;
+           // Console.WriteLine("The values staffmember in staffmember class::name= "+this.Name+"  department =" + this.Department + " date of joing =" + this.DateOfJoining.toString() + " status = " + this.Status + " punchid =" + this.PunchId);
+           
         }
     }
 }

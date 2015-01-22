@@ -1,58 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace finalams
 {
     public class Controller
     {
-         
-        
-        //using obj of xlsheetReader  call to method SaveXLPunchTimesToDB() which atomatically fetch d records,
-        //and save to d respective tables
-
-
-        public List<NewStaffMember>  SaveExcelToDatabase(string xlSheetPath)
-        {
-
-            //DateSeparator dateSeparator = new DateSeparator();
-            //string path= dateSeparator.StringDate(xlSheetPath);
-            XLSheetReader xlsheetReader = new XLSheetReader(xlSheetPath);
-           
-         return xlsheetReader.SaveXLPunchTimesToDB();
-        }
-
-        StaffMember staffmember = new StaffMember();
-        StaffAttendanceRecord SArecord = new StaffAttendanceRecord();
-       StaffGridRecord gridrecord = new StaffGridRecord();
-        TimeFrameDetails timeframe = new TimeFrameDetails();
-
-        
+        //StaffMember staffmember = new StaffMember();
+        //StaffAttendanceRecord SArecord = new StaffAttendanceRecord();
+        //StaffGridRecord gridrecord = new StaffGridRecord();
+        //TimeFrameDetails timeframe = new TimeFrameDetails();
        
         public List<StaffGridRecord> GetStaffGridRecords(DateRange dr,Constants.Status status)
         {
          //   StaffGridRecord sgr = new StaffGridRecord();
             List<StaffGridRecord> sgrlist ;//= new List<StaffGridRecord>();
             sgrlist=(new StaffGridRecord()).GetStaffGridRecords(dr,status);
-            //Console.WriteLine("The values of Controllergrid :  " + sgrlist[0].Name + " " + sgrlist[0].Dept);
-            //Console.WriteLine("The values of Controllergrid :  " + sgrlist[1].Name + " " + sgrlist[1].Dept);
-            //Console.WriteLine("The values of Controllergrid :  " + sgrlist[2].Name + " " + sgrlist[2].Dept);
-           
-         
+
+            foreach (StaffGridRecord sgr in sgrlist)
+            {
+                Console.WriteLine("The values of staffmember  Controller class::name=" + sgr.Name + "   department =" + sgr.Dept + " avgworkingtime= " +sgr.AvgWorkingTime.toString()+ " minworkingtime= " + sgr.MinWorkingTime.toString() +    "maxworking time= " + sgr.MaxWorkingTime.toString());
+
+            }
+          
            
             return sgrlist;
             
         }
+
+        //returning staff details of the given name...
         public StaffMember GetStaffMember(string name)
         {
             StaffMember sm = new StaffMember();
             sm.ReadStaffMember(name);
 
-            Console.WriteLine("The values of Controller:  " + sm.Name + " " + sm.Department);
+            //Console.WriteLine("The values of Controller:  " + sm.Name + " " + sm.Department);
             
             return sm;
         }
+
+        //returning all staff memeber details of given status ....
         public List<StaffMember> GetStaffMembers(Constants.Status status)
         {
             List<StaffMember> smlist = new List<StaffMember>();
@@ -60,6 +47,8 @@ namespace finalams
             smlist=sm.ReadStaffMembers(status);
             return smlist;
         }
+
+
         //public StaffAttendanceRecord GetStaffAttendanceRecord(string name, Date date)
         //{
         //    StaffAttendanceRecord sar = new StaffAttendanceRecord();
@@ -71,30 +60,34 @@ namespace finalams
         //    return sar;
             
         //}
-        public List<StaffAttendanceRecord> GetStaffAttendanceRecords(string name, DateRange dr)
+
+        //returning details of a particular staff memeber of the given date range .....
+        public StaffAttendanceRecord GetStaffAttendanceRecord(string name, DateRange dr)
         {
             StaffAttendanceRecord sar = new StaffAttendanceRecord();
-            List<StaffAttendanceRecord> staffAttendanceRecordList = new List<StaffAttendanceRecord>();
-            List<string> namestr = new List<string>();
-            StaffMember staffMember = new StaffMember();
-            namestr = staffMember.GetStaffNamesWithStatus(Constants.Status.Working);
-            foreach (string n in namestr)
-            {
-                sar.Populate(name, dr);
-                staffAttendanceRecordList.Add(sar);
-            }
-            return staffAttendanceRecordList;
+            sar.Populate(name, dr);
+           
+            
+                Console.WriteLine("The values staffmember in Controller class::name=" + sar.Name + "   department =" + sar.Dept);
+            
+            
+            return sar ;
         }
 
-        //for updations 
-        public void UpdateStaffAttendanceRecord(string name, Date date, Time intime, Time outtime, DateCategory dc)
+
+
+       //updating all details of a staff memeber .... 
+        public void UpdateStaffAttendanceRecord(StaffAttendanceRecord sar)
         {
-            SArecord.UpdatePTD();
+           // Console.WriteLine("the updated values for dpt in controller::intime = "+sar.InTime.toString()+"outtime = "+sar.OutTime.toString()+"  date = "+sar.Date.toString());
+            sar.UpdatePTD();
               
         }
+
+        
         public void UpdateStaffMemberRecord(StaffMember member)
         {
-            member.UpdateStaffmemberDetails();
+            member.UpdateStaffMemberDetails();
         }
 
         public void UpdateTimeFrameRecord(TimeFrameDetails frame)

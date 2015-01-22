@@ -9,7 +9,7 @@ namespace finalams
     {
         string name, dept;
        // String dateCategory;
-        double avgWorkingHours, minWorkingHours, maxWorkingHours;
+        Time avgWorkingTime, minWorkingTime, maxWorkingTime;
         int noOfAbsentDates, noOfNoPunchDates, noOfIPTDates, noOfLateDates;
 
 
@@ -22,20 +22,41 @@ namespace finalams
         {
             get { return dept; }
         }
-        public double AvgWorkingHours
+        public Time AvgWorkingTime
         {
-            get { return avgWorkingHours; }
+            get { return avgWorkingTime; }
         }
 
-        public double MinWorkingHours
+        public Time MinWorkingTime
         {
-            get { return minWorkingHours; }
+            get { return minWorkingTime; }
         }
-        public double MaxWorkingHours
+        public Time MaxWorkingTime
         {
-            get { return maxWorkingHours; }
+            get { return maxWorkingTime; }
+        }
+        public int NumberOfAbsentDates
+        {
+            get { return noOfAbsentDates; }
         }
 
+        public int NumberOfIPTDates
+        {
+            get { return noOfIPTDates; }
+        }
+
+        public int NumberOfNOPunchDates
+        {
+            get { return noOfNoPunchDates; }
+        }
+
+        public int NumberOfLateDates
+        {
+            get { return noOfLateDates; }
+
+        }
+
+        
         //public String DateCategory
         //{
         //    get { return dateCategory; }
@@ -44,14 +65,12 @@ namespace finalams
        
         public List<StaffGridRecord> GetStaffGridRecords(DateRange dr,Constants.Status status)
         {
-            StaffMember sm = new StaffMember();
-            
-
-            StaffAttendanceRecord sar = new StaffAttendanceRecord();
+            StaffMember staffMember = new StaffMember();//We need staffmember object for getting list<name> with the specified status 
+            StaffAttendanceRecord sar = new StaffAttendanceRecord();//We need sar object to collect and assign all the necessary values for grid to fetch from sar
             //DateCategory dc = new DateCategory();
             List<StaffGridRecord> sgrlist = new List<StaffGridRecord>();
             List<string> namestr = new List<string>();
-            namestr = sm.GetStaffNamesWithStatus(status);
+            namestr = staffMember.GetStaffNamesWithStatus(status);
             //foreach (string name in namestr)
             //{
             //    Console.WriteLine(name);
@@ -65,24 +84,33 @@ namespace finalams
                //StaffAttendanceRecord sar = new StaffAttendanceRecord();
 
                sar.Populate(name, dr);
-               sgr.name = sar.Name;
+               sgr.name = name;
                sgr.dept = sar.Dept;
-               sgr.avgWorkingHours = sar.AvgWorkingHours;    
-               sgr.maxWorkingHours = sar.MaxWorkingHours;
-               sgr.minWorkingHours = sar.MinWorkingHours;
-              //testing// Console.WriteLine("The values of StaffGridrecord :  " + sgr.Name + " " + sgr.Dept);
+               sgr.avgWorkingTime = sar.AvgWorkingTime;
+               sgr.maxWorkingTime = sar.MaxWorkingTime;
+               sgr.minWorkingTime  = sar.MinWorkingTime;
+               //testing// Console.WriteLine("The values of StaffGridrecord :  " + sgr.Name + " " + sgr.Dept);
 
                sgr.noOfAbsentDates = sar.GetDateCount(DateCategory.absent);
                sgr.noOfNoPunchDates = sar.GetDateCount(DateCategory.nopunch);// NumberOfDates(name, dc.nopunch, dr);
                sgr.noOfIPTDates = sar.GetDateCount(DateCategory.ipt);//NumberOfDates(name, dc.ipt, dr);
                sgr.noOfLateDates = sar.GetDateCount(DateCategory.late);//NumberOfDates(name, dc.late, dr);
-             
-              //// Console.WriteLine(sgr.name + " " + sgr.dept + " " + sgr.avgWH + " " + sgr.minWh + " " + sgr.maxWh + " " + sgr.noOfAbsentDates + " " + sgr.noOfIPTDates + " " + sgr.noOfLateDates + " " + sgr.noOfNoPunchDates);
+
+               // Console.WriteLine(sgr.name + " " + sgr.dept + " " + sgr.avgWH + " " + sgr.minWh + " " + sgr.maxWh + " " + sgr.noOfAbsentDates + " " + sgr.noOfIPTDates + " " + sgr.noOfLateDates + " " + sgr.noOfNoPunchDates);
                sgrlist.Add(sgr);
              
 
            }
+           //foreach (StaffGridRecord sgr in sgrlist)
+           //{
+           //    Console.WriteLine();
+           //    Console.WriteLine();
+           //    Console.WriteLine();
+           //    Console.WriteLine();
+           //    Console.WriteLine();
+           //    Console.WriteLine("The values staffmember in sgr class::name=" + sgr.Name + "   department =" + sgr.Dept+"avg working hours = "+sgr.avgWorkingHours+" min working hours= " +sgr.minWorkingHours+" max working hours = "+sgr.maxWorkingHours+" no of absent dates = "+sgr.noOfAbsentDates+" no of ipt dates = "+ sgr.noOfIPTDates+" no of no punch dates= "+sgr.noOfNoPunchDates+" no of late dates = "+ sgr.noOfLateDates);
            
+           //}
            return sgrlist;
         }
 

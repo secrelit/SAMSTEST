@@ -76,7 +76,7 @@ namespace finalams
         {
             if (isDepartmentChanged)
             {
-                dbo.UpdateDepartmentOf(this,olddept);
+                dbo.UpdateDepartmentOf(this);
             }
             if (isValidInTimeChanged)
             {
