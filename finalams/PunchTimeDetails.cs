@@ -21,12 +21,15 @@ namespace finalams
 
         //DbOperations dbo = new DbOperations();
 
-        //public string Name
-        //{ get { return name; }
-        //    set { this.name = value;
-        //    isNameChanged = true;        
-        //        }
-        //}
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                this.name = value;
+               // isNameChanged = true;
+            }
+        }
         public Date Date
         { get { return date; }
 
@@ -125,6 +128,11 @@ namespace finalams
                 Console.WriteLine("the updated values for dpt in ptd::date = " + this.Date.toString());
                 dbo.UpdateDateCategoryOf(this);
             }
+        }
+        internal void InsertIntoDailyPunchTime(PunchTimeDetails ptd, string name, finalams.Date date)
+        {
+            (new DbOperations()).InsertToDailyPunchTime(ptd, name, date);
+            //throw new NotImplementedException();
         }
    
     }

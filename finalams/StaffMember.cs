@@ -84,7 +84,7 @@ namespace finalams
             //}
             if (isDepartmentChanged)
             {
-                dbo.UpdateDepartmentOf(this) ;
+                dbo.UpdateDepartmentOf(this, dept);
             }
             if (isStatusChanged)
             {
