@@ -12,34 +12,30 @@ namespace finalams
            // Controller controller = new Controller();
            // List<NewStaffMember> nsm = controller.SaveExcelToDatabase("H:\\Nilesh sir\\14-12-2015.xls");
            //Console.WriteLine("Count of new members : {0}",nsm.Count);
-       DbOperations db = new DbOperations();
+             DbOperations db = new DbOperations();
             DateRange dr = new DateRange("12-12-2015","14-12-2015");
-            Console.WriteLine(db.GetDateCount("Jyoti M Kadam", "IPT Dates", dr ));
-            
-            
-            //PunchTimeDetails ptd = new PunchTimeDetails();
-            //ptd= PunchTimeDetails.GetPunchTimeDetails("manish",new Date("11/11/2011"));
-            //StaffAttendanceRecord sar = new StaffAttendanceRecord();
-            //sar.GetStaffAttendanceRecord("manish",new Date("11/11/2011"));
-            //Console.ReadLine();
-           // string str=null;
-           // Time t1 = new Time("");
-           // Time t3=new Time();
-           // Time t4 =new Time(" ");
-           //Time t2=new Time("3:56");
-           //Time t5 = new Time(str);
-            //int minutes = t2 - t1;
-
-          //  //Time t3 = new Time(minutes);
-          //Console.WriteLine("Time for normal: " + t2.toString());
-          // Console.WriteLine("Time for empty string " + t1.toString());
-          // Console.WriteLine("Time for string with whitespace " + t4.toString());
-          // Console.WriteLine("Time for default constructor " + t3.toString());
-          //  Console.WriteLine("Time for null value " + t5.toString());
-          // Console.WriteLine("Time for (hours minutes) and (str hours and minutes)"+t2.Hour+":"+t2.Minute );
-
-          // Console.WriteLine("Time for (hours minutes) and (str hours and minutes)" + t1.HourString + ":" + t1.MinuteString);
+            // public List<PunchTimeDetails> ReadPunchTimeDetails(string name, DateRange dr)
+            //Console.WriteLine(db.GetDateCount("Jyoti M Kadam", "IPT Dates", dr ));
+//       TimeFrameDetails timeframe = new TimeFrameDetails();
+             PunchTimeDetails ptd = new PunchTimeDetails();
+            List<PunchTimeDetails> punchTimeDetailList = new List<PunchTimeDetails>();
+            punchTimeDetailList = db.ReadPunchTimeDetails("Jyoti M Kadam", dr);
+          //  ptd =  db.ReadPunchTimeDetails("Darshan S Talegaonkar",new Date("12-12-2015"));
+            Console.WriteLine(punchTimeDetailList.Count);
+           //  timeframe.ValidInTime.Hour = 10;
+//timeframe.ValidInTime.Minute = 10;
+             // timeframe.ValidInTime.Hour = 10;
+             //timeframe.ValidInTime.Hour = 10;
            
+       //     db.UpdateInTimeOf(timeframe);
+       //      StaffMember staffMember = new StaffMember();
+           //  staffMember.Populate("Darshan S Talegaonkar");
+             //List<StaffMember> staffNameofStatus = new List<StaffMember>();
+             //staffNameofStatus = staffMember.ReadStaffMembers(Constants.Status.Working);
+             //Console.WriteLine("Count of new members : {0}", staffNameofStatus.Count);
+            // staffMember = staffMember.ReadStaffMember("Prashant P Solankar");
+           //  Console.WriteLine(staffMember.Department+ staffMember.DateOfJoining.Day+ staffMember.DateOfJoining.Month+ staffMember.DateOfJoining.Year+staffMember.Status.ToString());
+                    
             Console.ReadLine();
         }
     }

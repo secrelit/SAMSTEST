@@ -72,7 +72,7 @@ namespace finalams
         public List<StaffMember> ReadStaffMembers(Constants.Status status)// this method will call dal method to fetch following data
         {
             //List<StaffMember> smlist = (new DbOperations()).ReadStaffMemberDetails(status);
-            return (new DbOperations()).ReadStaffMemberDetails(status);
+            return (new DbOperations()).ReadStaffMemberDetails(status.ToString());
         }
 
         public void UpdateStaffMemberDetails()
@@ -84,7 +84,7 @@ namespace finalams
             //}
             if (isDepartmentChanged)
             {
-                dbo.UpdateDepartmentOf(this, dept);
+                dbo.UpdateDepartmentOf(this);
             }
             if (isStatusChanged)
             {
@@ -103,7 +103,7 @@ namespace finalams
             this.name = name;
             this.status = member.status;
             this.punch_id = member.punch_id;
-           // Console.WriteLine("The values staffmember in staffmember class::name= "+this.Name+"  department =" + this.Department + " date of joing =" + this.DateOfJoining.toString() + " status = " + this.Status + " punchid =" + this.PunchId);
+           Console.WriteLine("The values staffmember in staffmember class::name= "+this.Name+"  department =" + this.Department + " date of joing =" + this.DateOfJoining.toString() + " status = " + this.Status + " punchid =" + this.PunchId);
            
         }
     }

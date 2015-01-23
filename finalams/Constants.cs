@@ -13,6 +13,7 @@ namespace finalams
 
         public static Status GetStatus(String strStatus)
         {
+            //Status.Working.ToString()
 
             if (strStatus.Equals(Status.Working.ToString()))
                 return Status.Working;
@@ -24,10 +25,14 @@ namespace finalams
                 return Status.Resigned;
 
             else if (strStatus.Equals(Status.Absconding.ToString()))
+            {
                 return Status.Absconding;
+                }
             else
+            {
+                
                 throw new Exception("Invalid Status: " + strStatus);
-
+            }
         }
         
         

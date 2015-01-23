@@ -67,6 +67,7 @@ namespace finalams
             this.ValidOuttime = timeframe.ValidOuttime;
             this.latetime = timeframe.latetime;
             this.olddept = dept;
+           // Console.WriteLine();
         }
 
       

@@ -1063,6 +1063,8 @@ namespace finalams
                 timeFrame.ValidOutTime = new Time(reader.GetString("valid_out_time"));
                 timeFrame.LateTime = new Time(reader.GetString("late_time"));
             }
+
+          //  Console.WriteLine(timeFrame.ValidInTime.T + timeFrame.ValidOutTime.ToString() + timeFrame.LateTime.ToString());
             con.Close();
             return timeFrame;
 
@@ -1125,6 +1127,7 @@ namespace finalams
             param1.Value = oldDept;
             cmd.Parameters.Add(param1);
             cmd.ExecuteNonQuery();
+            //Console.WriteLine("DepartMent Updated");
 
             con.Close();
         }
@@ -1141,7 +1144,7 @@ namespace finalams
             con = new MySqlConnection(connectionString);
             con.Open();
 
-            string nameString = "update time_frame  set  valid_in_time=validInTime where dept=@dept";
+            string nameString = "update time_frame  set  valid_in_time=@validInTime where dept=@dept";
 
             cmd = new MySqlCommand(nameString, con);
             MySqlParameter param = new MySqlParameter();
@@ -1156,7 +1159,7 @@ namespace finalams
 
             cmd.ExecuteNonQuery();
 
-            Console.WriteLine("In Time Upadated");
+          //  Console.WriteLine("In Time Upadated");
             con.Close();
         }
 
@@ -1334,7 +1337,7 @@ namespace finalams
             con = new MySqlConnection(connectionString);
             con.Open();
 
-            string nameString = "Select in_hours,in_mins,out_hours,out_mins,date_category,remark from daily_punch_time where name=@name and day=@day and month=@month and year=@year  ";
+            string nameString = "Select in_time,out_time,date_category,remark from daily_punch_time where name=@name and day=@day and month=@month and year=@year  ";
 
             cmd = new MySqlCommand(nameString, con);
             MySqlParameter param1 = new MySqlParameter();
@@ -1363,14 +1366,18 @@ namespace finalams
 
             while (reader.Read())
             {
-                punchTimeDeail.InTime.Hour = int.Parse(reader.GetString(4));
-                punchTimeDeail.InTime.Minute = int.Parse(reader.GetString(5));
-                punchTimeDeail.OutTime.Hour = int.Parse(reader.GetString(6));
-                punchTimeDeail.OutTime.Minute = int.Parse(reader.GetString(7));
-                punchTimeDeail.DateCategory = reader.GetString(8);
-                punchTimeDeail.Remark = reader.GetString(9);
+                punchTimeDeail.InTime = new Time(reader.GetString("in_time"));
+              
+                punchTimeDeail.OutTime =new Time(reader.GetString("out_time"));
+             
+                punchTimeDeail.DateCategory = reader.GetString("date_category");
+                punchTimeDeail.Remark = reader.GetString("remark");
             }
+
+            //Console.WriteLine(punchTimeDeail.InTime.Hour);
             con.Close();
+
+            
             return punchTimeDeail;
 
         }
@@ -1392,7 +1399,7 @@ namespace finalams
             int toMonth = dr.todate.Month;
             int toYear = dr.todate.Year;
 
-            string str = "select in_hours,in_mins,out_hours,out_mins,date_category,remark from daily_punch_time where name=@name AND day BETWEEN @fromDay and @toDay AND month BETWEEN @fromMonth and @toMonth AND year BETWEEN @fromYear and @toYear";
+            string str = "select in_time,out_time,date_category,remark from daily_punch_time where name=@name AND day BETWEEN @fromDay and @toDay AND month BETWEEN @fromMonth and @toMonth AND year BETWEEN @fromYear and @toYear";
             cmd = new MySqlCommand(str, con);
             MySqlParameter param1 = new MySqlParameter();
             param1.ParameterName = "@name";
@@ -1438,12 +1445,12 @@ namespace finalams
             {
                 PunchTimeDetails ptDetail = new PunchTimeDetails();
 
-                ptDetail.InTime.Hour = int.Parse(reader.GetString(4));
-                ptDetail.InTime.Minute = int.Parse(reader.GetString(5));
-                ptDetail.OutTime.Hour = int.Parse(reader.GetString(6));
-                ptDetail.OutTime.Minute = int.Parse(reader.GetString(7));
-                ptDetail.DateCategory = reader.GetString(8);
-                ptDetail.Remark = reader.GetString(9);
+                ptDetail.InTime= new Time(reader.GetString("in_time"));
+                //ptDetail.InTime.Minute = int.Parse(reader.GetString(5));
+                ptDetail.OutTime = new Time(reader.GetString("out_time"));
+                //ptDetail.OutTime.Minute = int.Parse(reader.GetString(7));
+                ptDetail.DateCategory = reader.GetString("date_category");
+                ptDetail.Remark = reader.GetString("remark");
                 ptDetails.Add(ptDetail);
             }
             con.Close();
@@ -1473,11 +1480,19 @@ namespace finalams
 
             while (reader.Read())
             {
-                staffMember.Department = reader.GetString(1);
-                staffMember.Status = Constants.GetStatus(reader.GetString(2));
-                staffMember.DateOfJoining = new Date(reader.GetString(3));
-                staffMember.PunchId = int.Parse(reader.GetString(4));
+                string status;
+                staffMember.Department = reader.GetString("dept");
+                staffMember.PunchId = int.Parse(reader.GetString("punch_id"));
+                staffMember.DateOfJoining = new Date(reader.GetString("date_of_joining"));
+              
+                   staffMember.Status = Constants.GetStatus(reader.GetString("status"));
+         
+
+                
             }
+
+           // Console.WriteLine("day= "+staffMember.DateOfJoining.Day+" month = "+staffMember.DateOfJoining.Month+" year = "+staffMember.DateOfJoining.Year);
+           
             con.Close();
             return staffMember;
         }
@@ -1505,16 +1520,16 @@ namespace finalams
             while (reader.Read())
             {
                 StaffMember staffMember = new StaffMember();
-                staffMember.Name = reader.GetString(0);
-                staffMember.Department = reader.GetString(1);
-                staffMember.DateOfJoining = new Date(reader.GetString(3));
-                staffMember.PunchId = int.Parse(reader.GetString(4));
+                staffMember.Name = reader.GetString("name");
+                staffMember.Department = reader.GetString("dept");
+                staffMember.DateOfJoining = new Date(reader.GetString("date_of_joining"));
+                staffMember.PunchId = int.Parse(reader.GetString("punch_id"));
                 staffMemberDetails.Add(staffMember);
             }
             con.Close();
             return staffMemberDetails;
         }
-        public void updateDepartmentOf(StaffMember staffMember)
+        public void UpdateDepartmentOf(StaffMember staffMember)
         {
             MySqlConnection con;
             MySqlCommand cmd;
@@ -1536,7 +1551,7 @@ namespace finalams
             param1.Value = name;
             cmd.Parameters.Add(param1);
             cmd.ExecuteNonQuery();
-            Console.WriteLine("Department Updated");
+        //    Console.WriteLine("Department Updated");
             con.Close();
         }
         public void UpdateStatusOf(StaffMember staffMember)

@@ -80,19 +80,20 @@ namespace finalams
             if (date < 1) 
                 throw new Exception("Invalid Date (Less than 1).");
 
-            if (date > 31) 
-                throw new Exception("Invalid Date (Greater than 31).");
+            if (date > 31)
+                Console.WriteLine(date);
+            //throw new Exception("Invalid Date (Greater than 31).");
 
-           
+
             else if (this.month.Equals(Constants.MONTH.FEBRUARY))
             {
                 if (date > 28 && !isLeapYear()) throw new Exception("Invalid Date (February Date Cannot Be More Than 28!)");
-                if(date > 29 && isLeapYear()) throw new Exception("Invalid Date (February Date Cannot Be More than 29!)");
+                if (date > 29 && isLeapYear()) throw new Exception("Invalid Date (February Date Cannot Be More than 29!)");
             }
 
-            else if (is30DaysMonth()) 
+            else if (is30DaysMonth())
             {
-                if (date > 30) throw new Exception("The Month: ["+this.month+"]" + ", should have upto 30 days");
+                if (date > 30) throw new Exception("The Month: [" + this.month + "]" + ", should have upto 30 days");
             }
             
             return true;
